@@ -1,0 +1,15 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/DoctorLicenseManagement/.vs/DoctorLicenseManagement/CopilotIndices/17.14.1601.40145
+/DoctorLicenseManagement/.vs/DoctorLicenseManagement/DesignTimeBuild
+/DoctorLicenseManagement/.vs/DoctorLicenseManagement
+/DoctorLicenseManagement/DoctorLicenseManagement.API/bin/Debug/net9.0
+/DoctorLicenseManagement/DoctorLicenseManagement.API/obj
+/DoctorLicenseManagement/DoctorLicenseManagement.Application/bin/Debug/net9.0
+/DoctorLicenseManagement/DoctorLicenseManagement.Application/obj
+/DoctorLicenseManagement/DoctorLicenseManagement.Domain/bin/Debug/net9.0
+/DoctorLicenseManagement/DoctorLicenseManagement.Domain/obj
+/DoctorLicenseManagement/DoctorLicenseManagement.Infrastructure/bin/Debug/net9.0
+/DoctorLicenseManagement/DoctorLicenseManagement.Infrastructure/obj
