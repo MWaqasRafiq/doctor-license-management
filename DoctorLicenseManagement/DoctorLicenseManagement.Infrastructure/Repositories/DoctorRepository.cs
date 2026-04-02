@@ -26,10 +26,7 @@ namespace DoctorLicenseManagement.Infrastructure.Repositories
             p.Add("@Search", search);
             p.Add("@Status", status);
 
-            return await db.QueryAsync<DoctorDto>(
-                "sp_GetDoctors",
-                p,
-                commandType: CommandType.StoredProcedure);
+            return await db.QueryAsync<DoctorDto>( "sp_GetDoctors", p, commandType: CommandType.StoredProcedure);
         }
 
         public async Task<bool> ExistsByLicense(string license)
@@ -44,11 +41,17 @@ namespace DoctorLicenseManagement.Infrastructure.Repositories
         {
             using var db = Connection;
 
-            var sql = @"INSERT INTO Doctors VALUES
-        (@Id,@FullName,@Email,@Specialization,@LicenseNumber,
-         @LicenseExpiryDate,@Status,@CreatedDate,0)";
+            var p = new DynamicParameters();
+            p.Add("@Id", doctor.Id);
+            p.Add("@FullName", doctor.FullName);
+            p.Add("@Email", doctor.Email);
+            p.Add("@Specialization", doctor.Specialization);
+            p.Add("@LicenseNumber", doctor.LicenseNumber);
+            p.Add("@LicenseExpiryDate", doctor.LicenseExpiryDate);
+            p.Add("@Status", doctor.Status);
+            p.Add("@CreatedDate", doctor.CreatedDate);
 
-            await db.ExecuteAsync(sql, doctor);
+            await db.ExecuteAsync("sp_CreateDoctor", p, commandType: CommandType.StoredProcedure);
         }
 
         public async Task<Doctor> GetById(Guid id)
@@ -56,7 +59,7 @@ namespace DoctorLicenseManagement.Infrastructure.Repositories
             using var db = Connection;
 
             return await db.QueryFirstOrDefaultAsync<Doctor>(
-                "SELECT * FROM Doctors WHERE Id=@Id AND IsDeleted=0",
+                        "SELECT * FROM Doctors WHERE Id=@Id AND IsDeleted=0",
                 new { Id = id }) ?? new();
         }
 
@@ -74,6 +77,17 @@ namespace DoctorLicenseManagement.Infrastructure.Repositories
                     WHERE Id=@Id";
 
             await db.ExecuteAsync(sql, doctor);
+        }
+
+        public async Task UpdateStatus(Guid id, int status)
+        {
+            using var db = Connection;
+
+            var sql = @"UPDATE Doctors 
+                        SET Status = @Status
+                        WHERE Id = @Id AND IsDeleted = 0";
+
+            await db.ExecuteAsync(sql, new { Id = id, Status = status });
         }
 
         public async Task SoftDelete(Guid id)

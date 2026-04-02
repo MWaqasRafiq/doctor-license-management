@@ -10,6 +10,8 @@ namespace DoctorLicenseManagement.Application.DTOs
     {
         public Guid Id { get; set; }
         public string FullName { get; set; }
+        public string Email { get; set; }
+        public string Specialization { get; set; }
         public string LicenseNumber { get; set; }
         public DateTime LicenseExpiryDate { get; set; }
         public int Status { get; set; }

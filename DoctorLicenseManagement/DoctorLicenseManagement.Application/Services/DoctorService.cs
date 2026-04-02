@@ -19,11 +19,6 @@ namespace DoctorLicenseManagement.Application.Services
             _repo = repo;
         }
 
-        public async Task<IEnumerable<DoctorDto>> GetDoctors(string? search, int? status)
-        {
-            return await _repo.GetDoctors(search, status);
-        }
-
         public async Task Create(Doctor doctor)
         {
             if (await _repo.ExistsByLicense(doctor.LicenseNumber))
@@ -35,6 +30,11 @@ namespace DoctorLicenseManagement.Application.Services
             await _repo.Create(doctor);
         }
 
+        public async Task<IEnumerable<DoctorDto>> GetDoctors(string? search, int? status)
+        {
+            return await _repo.GetDoctors(search, status);
+        }
+
         public async Task<Doctor> GetById(Guid id)
         {
             return await _repo.GetById(id);
@@ -43,6 +43,16 @@ namespace DoctorLicenseManagement.Application.Services
         public async Task Update(Doctor doctor)
         {
             await _repo.Update(doctor);
+        }
+
+        public async Task UpdateStatus(Guid id, int status)
+        {
+            var doctor = await _repo.GetById(id);
+
+            if (doctor == null)
+                throw new Exception("Doctor not found");
+
+            await _repo.UpdateStatus(id, status);
         }
 
         public async Task SoftDelete(Guid id)

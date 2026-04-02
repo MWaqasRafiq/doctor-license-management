@@ -13,3 +13,7 @@
 /DoctorLicenseManagement/DoctorLicenseManagement.Domain/obj
 /DoctorLicenseManagement/DoctorLicenseManagement.Infrastructure/bin/Debug/net9.0
 /DoctorLicenseManagement/DoctorLicenseManagement.Infrastructure/obj
+/DoctorLicenseManagement/DoctorLicenseManagement.API/bin/Debug/net8.0
+/DoctorLicenseManagement/DoctorLicenseManagement.Application/bin/Debug/net8.0
+/DoctorLicenseManagement/DoctorLicenseManagement.Domain/bin/Debug/net8.0
+/DoctorLicenseManagement/DoctorLicenseManagement.Infrastructure/bin/Debug/net8.0
